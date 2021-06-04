@@ -22,20 +22,7 @@ namespace Sandas_assignment
                     string line;
                     while ((line = sr.ReadLine()) != null)
                     {
-                        WorkerData temp = FormatCSVToWorkerData(line);
-
-                        if (data.Exists(x => x.Name == temp.Name))
-                        {
-                            var existingData = data.FirstOrDefault(x => x.Name == temp.Name);
-
-                            existingData.Salary += temp.Salary;
-                            existingData.BonusPayment += temp.BonusPayment;
-                            existingData.AdditionalPayment += temp.AdditionalPayment;
-                            existingData.HolidayPayment += temp.HolidayPayment;
-
-                        }
-                        else if (temp.Name != null)
-                            data.Add(temp);
+                        TryAddWorkerDataFromString(line,data);
                     }
                 }
                 return data;
@@ -45,6 +32,24 @@ namespace Sandas_assignment
                 Console.WriteLine(e.Message);
                 return null;
             }
+        }
+
+        public void TryAddWorkerDataFromString(string line,List<WorkerData> data)
+        {
+            WorkerData temp = FormatCSVToWorkerData(line);
+
+            if (data.Exists(x => x.Name == temp.Name))
+            {
+                var existingData = data.FirstOrDefault(x => x.Name == temp.Name);
+
+                existingData.Salary += temp.Salary;
+                existingData.BonusPayment += temp.BonusPayment;
+                existingData.AdditionalPayment += temp.AdditionalPayment;
+                existingData.HolidayPayment += temp.HolidayPayment;
+
+            }
+            else if (temp.Name != null)
+                data.Add(temp);
         }
 
         private WorkerData FormatCSVToWorkerData(string v)
