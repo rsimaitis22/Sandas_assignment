@@ -9,7 +9,7 @@ namespace Sandas_assignment
         static void Main(string[] args)
         {
             //input select assignment 1 or 2
-            LongestWord("bbbb");
+            LongestWord("abnaznas");
             CSVService csvS = new CSVService();
 
             Console.WriteLine("Enter filename");
@@ -28,22 +28,22 @@ namespace Sandas_assignment
 
         public static int LongestWord(string input)
         {
-            int maxConstonantLength = 2;
+            int maxConstonantLength = 3;
             string currentStr = "";
             string maxStr = "";
             var inputChars = input.ToCharArray();
             char[] vowels = new char[] { 'a', 'e', 'y', 'u', 'i', 'o' };
-            char[] constonants = new char[] { 'q', 'w', 'r', 't', 'p', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm' };
+
             List<char> usedChars = new List<char>();
 
+            bool isVowel = false;
             int constonant = 0;
-            bool vowel = false;
 
             for (int i = 0; i < inputChars.Length; i++)
             {
                 for (int count = i; count < inputChars.Length; count++)
                 {
-                    vowel = false;
+                    isVowel = false;
                     if (usedChars.Contains(inputChars[count]))
                     {
                         usedChars.Clear();
@@ -58,28 +58,30 @@ namespace Sandas_assignment
                     {
                         if (item == inputChars[count])
                         {
+                            constonant = 0;
+                            isVowel = true;
                             currentStr = $"{currentStr}{inputChars[count]}";
-                            vowel = true;
+                            if (currentStr.Length > maxStr.Length)
+                                maxStr = currentStr;
+                            break;
                         }
                     }
-                    if (currentStr.Length > maxStr.Length)
-                        maxStr = currentStr;
-
-                    if (vowel)
-                        break;
-                    else if (constonant > 1)
+                    if(!isVowel)
                     {
-                        usedChars.Clear();
-                        currentStr = "";
-                        constonant = 0;
-                        break;
-                    }
-                    else
-                    {
-                        currentStr = $"{currentStr}{inputChars[count]}";
                         constonant++;
-                        if (currentStr.Length > maxStr.Length)
-                            maxStr = currentStr;
+                        if (constonant > maxConstonantLength)
+                        {
+                            usedChars.Clear();
+                            currentStr = "";
+                            constonant = 0;
+                            break;
+                        }
+                        else
+                        {
+                            currentStr = $"{currentStr}{inputChars[count]}";
+                            if (currentStr.Length > maxStr.Length)
+                                maxStr = currentStr;
+                        }
                     }
                 }
             }

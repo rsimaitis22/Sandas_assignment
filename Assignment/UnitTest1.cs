@@ -59,5 +59,35 @@ namespace Assignment
             string word = "";
             Assert.That(Program.LongestWord(word), Is.EqualTo(0).NoClip);
         }
+        [Test]
+        public void ExampleFive()
+        {
+            string word = "dvdf";
+            Assert.That(Program.LongestWord(word), Is.EqualTo(3).NoClip);
+        }
+        [Test]
+        public void ExampleSix()
+        {
+            string word = "aab";
+            Assert.That(Program.LongestWord(word), Is.EqualTo(2).NoClip);
+        }
+        [Test]
+        public void ExampleSeven()
+        {
+            string word = "abnagnas";
+            Assert.That(Program.LongestWord(word), Is.EqualTo(4).NoClip);
+        }
+        [Test]
+        public void ExampleEight()
+        {
+            string word = "contracted";
+            Assert.That(Program.LongestWord(word), Is.EqualTo(6).NoClip);
+        }
+        [Test]
+        public void ExampleNine()
+        {
+            string word = "unscrambling";
+            Assert.That(Program.LongestWord(word), Is.EqualTo(10).NoClip);
+        }
     }
 }
