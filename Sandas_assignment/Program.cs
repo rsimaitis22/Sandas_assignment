@@ -4,12 +4,11 @@ using System.Linq;
 
 namespace Sandas_assignment
 {
+
     public class Program
     {
         static void Main(string[] args)
         {
-            //input select assignment 1 or 2
-            LongestWord("abnaznas");
             CSVService csvS = new CSVService();
 
             Console.WriteLine("Enter filename");
@@ -25,6 +24,7 @@ namespace Sandas_assignment
                 }
             }
         }
+
 
         public static int LongestWord(string input)
         {
